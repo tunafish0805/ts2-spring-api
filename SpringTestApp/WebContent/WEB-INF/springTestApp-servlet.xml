@@ -1,0 +1,46 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	<context:property-placeholder />
+	<context:annotation-config />
+	<context:component-scan base-package="com.springTestApp.controller"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<mvc:annotation-driven />
+	<mvc:default-servlet-handler />
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<bean id="documentationController" class="org.jsondoc.springmvc.controller.JSONDocController">
+		<constructor-arg name="version" value="1.0" />
+		<constructor-arg name="basePath"
+			value="http://localhost:8080/SpringTestApp" />
+		<constructor-arg name="packages">
+			<list>
+				<value>com.springTestApp.controller</value>
+				<value>com.springTestApp.vo</value>
+			</list>
+		</constructor-arg>
+		<property name="playgroundEnabled" value="true" />
+		<property name="displayMethodAs" value="URI" />
+	</bean>
+
+	<import resource="resources/Spring-Datasource.xml" />
+	<import resource="resources/Spring-TestVO.xml" />
+</beans>
