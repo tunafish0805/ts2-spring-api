@@ -3,6 +3,7 @@ package com.springTestApp.dao;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,11 @@ import com.springTestApp.dao.TestDAO;
 
 public class TestDAOImpl implements TestDAO {
     private DataSource dataSource;
+    private Connection conn;
+    
+    public static final String ELEMENT_TABLE = "ElementTable";
+    public static final String ATTRIBUTE_TABLE = "AttributeTable";
+    public static final String VALUE_TABLE = "ValueTable";
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -130,6 +136,74 @@ public class TestDAOImpl implements TestDAO {
                 } catch (SQLException e) {
                 }
             }
+        }
+    }
+    
+    @Override
+    public String fetchDataValue(String importIndex, String marketIndex, String timeIndex, String measureIndex) {
+        connectDB();
+        
+        if (importIndex.equals("") || marketIndex.equals("") || timeIndex.equals("") || measureIndex.equals("")) {
+            return null;
+        }
+
+        String statement = " SELECT actualvalue FROM " + VALUE_TABLE +
+                           " WHERE importindex = ?::integer AND" +
+                           " marketindex = ?::integer AND" +
+                           " timeindex = ?::integer AND" +
+                           " measureindex = ?::integer";
+        try {
+            if (conn == null || conn.isClosed()) connectDB();
+            PreparedStatement ps = conn.prepareStatement(statement);
+            ps.setString(1, importIndex);
+            ps.setString(2, marketIndex);
+            ps.setString(3, timeIndex);
+            ps.setString(4, measureIndex);
+            System.out.println(ps.toString());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            String actualValue = rs.getString(1).trim();
+            ps.close();
+            return actualValue;
+        }
+        catch (SQLException e) {
+            return null;
+        }
+        finally {
+            try { conn.close(); }
+            catch (SQLException e) {
+                return null;
+            }
+        }
+    }
+    
+    public void connectDB() {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Where is your PostgreSQL JDBC Driver? "
+                            + "Include in your library path!");
+            e.printStackTrace();
+            return;
+        }
+
+        System.out.println("PostgreSQL JDBC Driver Registered...");
+        Connection connection = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:postgresql://rainbowjellybeans.cnc8wwjfvy2q.us-east-1.rds.amazonaws.com:5432/postgres", "rooty_tooty", "password");
+
+        } catch (SQLException e) {
+            System.out.println("Connection Failed! Check output console");
+            e.printStackTrace();
+            return;
+        }
+
+        if (connection != null) {
+            System.out.println("DB Connect Successful...");
+            this.conn = connection;
+        } else {
+            System.out.println("Failed to make connection!");
         }
     }
 }

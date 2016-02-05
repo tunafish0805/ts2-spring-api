@@ -36,7 +36,7 @@ public class TestController {
     @Autowired
     private TestService testService;
 
-    @RequestMapping(value = "/device", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/device", method = RequestMethod.POST)
     public Device create(@RequestBody Device device) {
         testService.insert(device);
         return device;
@@ -56,5 +56,11 @@ public class TestController {
     @RequestMapping(value = "/device", method = RequestMethod.DELETE)
     public void delete(@RequestBody Device device) {
         testService.delete(device.getId());
+    }*/
+
+    @RequestMapping(value = "/data", method = RequestMethod.GET)
+    public String get(@RequestParam("importIndex") String importIndex, @RequestParam("marketIndex") String marketIndex,
+                    @RequestParam("timeIndex") String timeIndex, @RequestParam("measureIndex") String measureIndex) {
+        return testService.fetchDataValue(importIndex, marketIndex, timeIndex, measureIndex);
     }
 }

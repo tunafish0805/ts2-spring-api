@@ -5,7 +5,7 @@
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="${DB_URL}" />
 		<property name="username" value="${USERNAME}"/>
 		<property name="password" value="${PASSWORD}"/>

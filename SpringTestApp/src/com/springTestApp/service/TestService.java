@@ -11,4 +11,5 @@ public interface TestService {
     public List<Device> list();
     public void delete(String id);
     public void update(Device device);
+    public String fetchDataValue(String importIndex, String marketIndex, String timeIndex, String measureIndex);
 }

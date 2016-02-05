@@ -37,4 +37,9 @@ public class TestServiceImpl implements TestService{
         testDAO.insert(device);
     }
 
+    @Override
+    public String fetchDataValue(String importIndex, String marketIndex, String timeIndex, String measureIndex) {
+        return testDAO.fetchDataValue(importIndex, marketIndex, timeIndex, measureIndex);
+    }
+
 }

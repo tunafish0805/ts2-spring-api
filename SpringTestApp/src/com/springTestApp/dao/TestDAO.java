@@ -8,4 +8,5 @@ public interface TestDAO {
     public void insert(Device device);
     public List<Device> list();
     public void delete(String id);
+    public String fetchDataValue(String importIndex, String marketIndex, String timeIndex, String measureIndex);
 }
