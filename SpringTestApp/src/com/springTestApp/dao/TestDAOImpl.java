@@ -22,7 +22,7 @@ public class TestDAOImpl implements TestDAO {
     public static final String VALUE_TABLE = "ValueTable";
 
     public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+        //this.dataSource = dataSource;
     }
 
     public void insert(Device device) {

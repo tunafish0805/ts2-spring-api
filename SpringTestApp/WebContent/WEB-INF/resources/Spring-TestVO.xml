@@ -4,7 +4,7 @@
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<bean id="TestDAO" class="com.springTestApp.dao.TestDAOImpl">
-		<property name="dataSource" ref="dataSource" />
+		<!-- <property name="dataSource" ref="dataSource" /> -->
 	</bean>
 	
 	<bean id="TestService" class="com.springTestApp.service.TestServiceImpl" />
