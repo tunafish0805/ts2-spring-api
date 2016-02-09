@@ -1,2 +1,7 @@
 /build/
-/target/
+/target/classes/
+/target/generated-sources/
+/target/m2e-wtp/
+/target/maven-archiver/
+/target/maven-status/
+/target/SpringTestApp-0.0.1-SNAPSHOT/
