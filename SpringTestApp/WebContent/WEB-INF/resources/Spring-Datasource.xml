@@ -3,11 +3,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<!-- <bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="${DB_URL}" />
-		<property name="username" value="${USERNAME}"/>
-		<property name="password" value="${PASSWORD}"/>
-	</bean> -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="${DB_URL}"/>
+        <property name="username" value="${USERNAME}"/>
+        <property name="password" value="${PASSWORD}"/>
+    </bean>
 </beans>

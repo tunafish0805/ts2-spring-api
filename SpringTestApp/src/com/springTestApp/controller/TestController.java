@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springTestApp.service.TestService;
-import com.springTestApp.vo.Device;
 
 @RestController
 @Scope("request")
@@ -35,28 +34,6 @@ public class TestController {
 
     @Autowired
     private TestService testService;
-
-    /*@RequestMapping(value = "/device", method = RequestMethod.POST)
-    public Device create(@RequestBody Device device) {
-        testService.insert(device);
-        return device;
-    }
-
-    @RequestMapping(value = "/device", method = RequestMethod.PUT)
-    public Device update(@RequestBody Device device) {
-        testService.update(device);
-        return device;
-    }
-
-    @RequestMapping(value = "/device", method = RequestMethod.GET)
-    public List<Device> request() {
-        return testService.list();
-    }
-
-    @RequestMapping(value = "/device", method = RequestMethod.DELETE)
-    public void delete(@RequestBody Device device) {
-        testService.delete(device.getId());
-    }*/
 
     @RequestMapping(value = "/data", method = RequestMethod.GET)
     public String get(@RequestParam("importIndex") String importIndex, @RequestParam("marketIndex") String marketIndex,
