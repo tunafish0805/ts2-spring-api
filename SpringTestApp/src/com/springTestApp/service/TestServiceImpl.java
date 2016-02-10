@@ -10,8 +10,8 @@ import com.springTestApp.dao.TestDAO;
 
 @Service
 @Transactional(readOnly = true)
-public class TestServiceImpl implements TestService{
-    
+public class TestServiceImpl implements TestService {
+
     @Autowired
     private TestDAO testDAO;
 

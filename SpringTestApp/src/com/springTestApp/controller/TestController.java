@@ -34,8 +34,7 @@ public class TestController {
 
     @Autowired
     private TestService testService;
-    
-    // comment 
+
     @RequestMapping(value = "/data", method = RequestMethod.GET)
     public String get(@RequestParam("importIndex") String importIndex, @RequestParam("marketIndex") String marketIndex,
                     @RequestParam("timeIndex") String timeIndex, @RequestParam("measureIndex") String measureIndex) {

@@ -14,7 +14,7 @@ import com.springTestApp.dao.TestDAO;
 
 public class TestDAOImpl implements TestDAO {
     private DataSource dataSource;
-    
+
     public static final String ELEMENT_TABLE = "ElementTable";
     public static final String ATTRIBUTE_TABLE = "AttributeTable";
     public static final String VALUE_TABLE = "ValueTable";
@@ -22,20 +22,17 @@ public class TestDAOImpl implements TestDAO {
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    
+
     @Override
     public String fetchDataValue(String importIndex, String marketIndex, String timeIndex, String measureIndex) {
-        
+
         if (importIndex.equals("") || marketIndex.equals("") || timeIndex.equals("") || measureIndex.equals("")) {
             return null;
         }
 
-        String statement = " SELECT actualvalue FROM " + VALUE_TABLE +
-                           " WHERE importindex = ?::integer AND" +
-                           " marketindex = ?::integer AND" +
-                           " timeindex = ?::integer AND" +
-                           " measureindex = ?::integer";
-        
+        String statement = " SELECT actualvalue FROM " + VALUE_TABLE + " WHERE importindex = ?::integer AND"
+                        + " marketindex = ?::integer AND" + " timeindex = ?::integer AND" + " measureindex = ?::integer";
+
         Connection conn = null;
         try {
             conn = dataSource.getConnection();
@@ -50,13 +47,12 @@ public class TestDAOImpl implements TestDAO {
             String actualValue = rs.getString(1).trim();
             ps.close();
             return actualValue;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             return null;
-        }
-        finally {
-            try { conn.close(); }
-            catch (SQLException e) {
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
                 return null;
             }
         }
