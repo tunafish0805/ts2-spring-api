@@ -17,7 +17,7 @@ public class TestController {
     @Autowired
     private TestService testService;
 
-    @RequestMapping(value = "/ndx", method = RequestMethod.GET)
+    @RequestMapping(value = "/data", method = RequestMethod.GET)
     public String get(@RequestParam("importIndex") String importIndex, @RequestParam("marketIndex") String marketIndex,
                     @RequestParam("timeIndex") String timeIndex, @RequestParam("measureIndex") String measureIndex) {
         return testService.fetchDataValue(importIndex, marketIndex, timeIndex, measureIndex);
